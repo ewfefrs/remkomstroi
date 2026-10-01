@@ -1,0 +1,13 @@
+# Лог заявок содержит персональные данные. Закрываем к нему доступ из веба.
+<FilesMatch "\.(log|md)$">
+  <IfModule mod_authz_core.c>
+    Require all denied
+  </IfModule>
+  <IfModule !mod_authz_core.c>
+    Order allow,deny
+    Deny from all
+  </IfModule>
+</FilesMatch>
+
+# config.php отдаётся только как исполняемый PHP, листинг папки не нужен
+Options -Indexes
